@@ -1,6 +1,7 @@
 setwd("/Users/anttonalberdi/github/microbiota_adaptation_review/")
 library(stringr)
 library(caret)
+library(caretEnsemble)
 all <- read.csv("data/all_20211025.csv")
 
 ##############
@@ -17,7 +18,7 @@ write.csv(all.random,"data/all_20211025_random200.csv",row.names=FALSE)
 ##############
 # 3 - Load and modify response data
 ##############
-all.random <- read.csv("data/all_20211025_random200_test.csv")
+all.random <- read.csv("data/all_20211025_random200.csv")
 all.random <- all.random[,c("Title","DOI","Keywords","Response")]
 rownames(all.random) <- all.random$DOI
 
@@ -48,7 +49,6 @@ all.matrix <- as.data.frame(all.matrix)
 all.matrix <- all.matrix[rowSums(all.matrix) != 0,]
 all.matrix$Response_variable <- all.random[rownames(all.matrix),"Response"]
 
-
 ##############
 # 4 - Create keyword model
 ##############
@@ -69,7 +69,6 @@ cv <- trainControl(method="repeatedcv",
                      summaryFunction=twoClassSummary,
                      indexFinal=NULL,
                      savePredictions = TRUE)
-
 
 #TuneGrids
 grid_rf <-  expand.grid(mtry = c(80,500,1000,1500))

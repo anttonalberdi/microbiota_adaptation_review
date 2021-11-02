@@ -1,207 +1,3 @@
-sum(!complete.cases(bold_asv))
-sum(complete.cases(bold_asv)
-)
-complete.cases(bold_asv)
-sum(bold_asv =="")
-sum(ncbi_asv =="")
-asv="X"
-bold_asv <- bold_table[bold_table$OTU == asv,]
-bold_asv
-nrow(bold_asv)
-nrow(ncbi_asv)
-#Load tables#
-bold_table <- read.table("/Users/anttonalberdi/Downloads/ZBJ.tax.final-1.tsv",header=TRUE, sep="\t")#
-ncbi_table <- read.table("/Users/anttonalberdi/Downloads/ZBJ_nt.tax.final-1.tsv",header=TRUE, sep="\t")#
-#
-#Remove duplicates#
-bold_table <- bold_table[!duplicated(bold_table),]#
-ncbi_table <- ncbi_table[!duplicated(ncbi_table),]
-#Identify ASVs and sort them#
-asvlist <- mixedsort(unique(c(as.character(bold_table[,1]),as.character(ncbi_table[,1]))))#
-#
-#Iterate across ASVs#
-for (asv in asvlist){#
-  #Subset table#
-  bold_asv <- bold_table[bold_table$OTU == asv,]#
-  ncbi_asv <- ncbi_table[ncbi_table$OTU == asv,]#
-#
-  #If BOLD is empty use NCBI#
-  if(nrow(bold_asv) == 0){#
-  output_asv <- ncbi_asv#
-  #If NCBI is empty use BOLD#
-  }else if(nrow(ncbi_asv) == 0){#
-  output_asv <- bold_asv#
-  }else{#
-  #If both taxonomies are present:#
-    #If taxonomies are identical just print one#
-    if(all(bold_asv[c(3:8)] == ncbi_asv[c(3:8)])){#
-    output_asv <- bold_asv#
-    }else{#
-      #If taxonomies are different select the one with highest identity#
-      if(bold_asv[,2] > ncbi_asv[,2]){#
-      output_asv <- bold_asv#
-      }else if(bold_asv[,2] < ncbi_asv[,2]){#
-      output_asv <- ncbi_asv#
-      }else{#
-        #If the identities are identical, select the most complete taxonomy#
-        if(sum(bold_asv=="") < sum(ncbi_asv=="")){#
-        output_asv <- bold_asv#
-        }else if(sum(bold_asv=="") > sum(ncbi_asv=="")){#
-        output_asv <- ncbi_asv#
-      }else{#
-        #If the criteria cannot choose any preferred taxonomy, use BOLD for being better curated#
-        output_asv <- bold_asv#
-      }#
-    }#
-  }#
-  }#
-}
-#Load tables#
-bold_table <- read.table("/Users/anttonalberdi/Downloads/ZBJ.tax.final-1.tsv",header=TRUE, sep="\t")#
-ncbi_table <- read.table("/Users/anttonalberdi/Downloads/ZBJ_nt.tax.final-1.tsv",header=TRUE, sep="\t")#
-#
-#Remove duplicates#
-bold_table <- bold_table[!duplicated(bold_table),]#
-ncbi_table <- ncbi_table[!duplicated(ncbi_table),]#
-#
-#Identify ASVs and sort them#
-asvlist <- mixedsort(unique(c(as.character(bold_table[,1]),as.character(ncbi_table[,1]))))#
-#
-merged_taxonomy <- c()#
-#Iterate across ASVs#
-for (asv in asvlist){#
-  #Subset table#
-  bold_asv <- bold_table[bold_table$OTU == asv,]#
-  ncbi_asv <- ncbi_table[ncbi_table$OTU == asv,]#
-#
-  #If BOLD is empty use NCBI#
-  if(nrow(bold_asv) == 0){#
-  output_asv <- ncbi_asv#
-  #If NCBI is empty use BOLD#
-  }else if(nrow(ncbi_asv) == 0){#
-  output_asv <- bold_asv#
-  }else{#
-  #If both taxonomies are present:#
-    #If taxonomies are identical just print one#
-    if(all(bold_asv[c(3:8)] == ncbi_asv[c(3:8)])){#
-    output_asv <- bold_asv#
-    }else{#
-      #If taxonomies are different select the one with highest identity#
-      if(bold_asv[,2] > ncbi_asv[,2]){#
-      output_asv <- bold_asv#
-      }else if(bold_asv[,2] < ncbi_asv[,2]){#
-      output_asv <- ncbi_asv#
-      }else{#
-        #If the identities are identical, select the most complete taxonomy#
-        if(sum(bold_asv=="") < sum(ncbi_asv=="")){#
-        output_asv <- bold_asv#
-        }else if(sum(bold_asv=="") > sum(ncbi_asv=="")){#
-        output_asv <- ncbi_asv#
-      }else{#
-        #If the criteria cannot choose any preferred taxonomy, use BOLD for being better curated#
-        output_asv <- bold_asv#
-      }#
-    }#
-  }#
-  }#
-merged_taxonomy <- rbind(merged_taxonomy,output_asv)#
-}
-head(merged_taxonomy)
-head(merged_taxonomy,50)
-write.table(merged_taxonomy,"/Users/anttonalberdi/Downloads/ZBJ.merged.tax.tsv")
-write.table(merged_taxonomy,"/Users/anttonalberdi/Downloads/ZBJ.merged.tax.tsv",quotes=FALSE)
-write.table(merged_taxonomy,"/Users/anttonalberdi/Downloads/ZBJ.merged.tax.tsv",quote=FALSE)
-write.table(merged_taxonomy,"/Users/anttonalberdi/Downloads/ZBJ.merged.tax.tsv",quote=FALSE,sep="\t")
-write.table(merged_taxonomy,"/Users/anttonalberdi/Downloads/ZBJ.merged.tax.tsv",quote=FALSE,sep="\t",rownames=TRUE,colnames=TRUE)
-write.table(merged_taxonomy,"/Users/anttonalberdi/Downloads/ZBJ.merged.tax.tsv",quote=FALSE,sep="\t",row.names=TRUE,col.names=TRUE)
-head(merged_taxonomy)
-write.table(merged_taxonomy,"/Users/anttonalberdi/Downloads/ZBJ.merged.tax.tsv",quote=FALSE,sep="\t",row.names=FALSE,col.names=TRUE)
-#Load tables#
-bold_table <- read.table("/Users/anttonalberdi/Downloads/ANML.tax.final-1.tsv",header=TRUE, sep="\t")#
-ncbi_table <- read.table("/Users/anttonalberdi/Downloads/ANML_nt.tax.final-1.tsv",header=TRUE, sep="\t")#
-#
-#Remove duplicates#
-bold_table <- bold_table[!duplicated(bold_table),]#
-ncbi_table <- ncbi_table[!duplicated(ncbi_table),]#
-#
-#Identify ASVs and sort them#
-asvlist <- mixedsort(unique(c(as.character(bold_table[,1]),as.character(ncbi_table[,1]))))#
-#
-merged_taxonomy <- c()#
-#Iterate across ASVs#
-for (asv in asvlist){#
-  #Subset table#
-  bold_asv <- bold_table[bold_table$OTU == asv,]#
-  ncbi_asv <- ncbi_table[ncbi_table$OTU == asv,]#
-#
-  #If BOLD is empty use NCBI#
-  if(nrow(bold_asv) == 0){#
-  output_asv <- ncbi_asv#
-  #If NCBI is empty use BOLD#
-  }else if(nrow(ncbi_asv) == 0){#
-  output_asv <- bold_asv#
-  }else{#
-  #If both taxonomies are present:#
-    #If taxonomies are identical just print one#
-    if(all(bold_asv[c(3:8)] == ncbi_asv[c(3:8)])){#
-    output_asv <- bold_asv#
-    }else{#
-      #If taxonomies are different select the one with highest identity#
-      if(bold_asv[,2] > ncbi_asv[,2]){#
-      output_asv <- bold_asv#
-      }else if(bold_asv[,2] < ncbi_asv[,2]){#
-      output_asv <- ncbi_asv#
-      }else{#
-        #If the identities are identical, select the most complete taxonomy#
-        if(sum(bold_asv=="") < sum(ncbi_asv=="")){#
-        output_asv <- bold_asv#
-        }else if(sum(bold_asv=="") > sum(ncbi_asv=="")){#
-        output_asv <- ncbi_asv#
-      }else{#
-        #If the criteria cannot choose any preferred taxonomy, use BOLD for being better curated#
-        output_asv <- bold_asv#
-      }#
-    }#
-  }#
-  }#
-merged_taxonomy <- rbind(merged_taxonomy,output_asv)#
-}
-write.table("/Users/anttonalberdi/Downloads/ANML.merged.tax.tsv",opt$o,quote=FALSE,sep="\t",row.names=FALSE,col.names=TRUE)
-write.table("/Users/anttonalberdi/Downloads/ANML.merged.tax.tsv",quote=FALSE,sep="\t",row.names=FALSE,col.names=TRUE)
-write.table(merged_taxonomy,"/Users/anttonalberdi/Downloads/ANML.merged.tax.tsv",quote=FALSE,sep="\t",row.names=FALSE,col.names=TRUE)
-~dirFCM1_18.csvdir=
-dir="/cliptest/2-Filtered/A/"
-filtFs_list <- gsub("_1.fastq","",list.files(path = dir, pattern = "_1.fastq", full.names=TRUE))#
-filtRs_list <- gsub("_2.fastq","",list.files(path = dir, pattern = "_2.fastq", full.names=TRUE))#
-filtFs_rev_list <- gsub("_1.rev.fastq","",list.files(path = dir, pattern = "_1.rev.fastq", full.names=TRUE))#
-filtRs_rev_list <- gsub("_2.rev.fastq","",list.files(path = dir, pattern = "_2.rev.fastq", full.names=TRUE))
-filtRs_rev_list
-filtFs_list
-dir
-filtFs_list <- gsub("_1.fastq","",list.files(path = dir, pattern = "_1.fastq", full.names=TRUE))
-filtFs_list
-list.files(path = dir, pattern = "_1.fastq", full.names=TRUE)
-dir
-dir="/Users/anttonalberdi/cliptest/2-Filtered/A/"
-filtFs_list <- gsub("_1.fastq","",list.files(path = dir, pattern = "_1.fastq", full.names=TRUE))
-filtFs_list
-filtFs_rev_list <- gsub("_1.rev.fastq","",list.files(path = dir, pattern = "_1.rev.fastq", full.names=TRUE))
-filtFs_rev_list
-if (setequal(filtFs_list, filtRs_list) == TRUE){#
-  filtFs <- paste(filtFs_list,"_1.fastq",sep="")#
-  filtRs <- paste(filtFs_list,"_2.fastq",sep="")#
-}else if(setequal(filtFs_rev_list, filtRs_rev_list) == TRUE){#
-  filtFs <- c(filtFs,paste(filtFs_rev_list,"_1.rev.fastq",sep=""))#
-  filtRs <- c(filtRs,paste(filtRs_rev_list,"_1.rev.fastq",sep=""))#
-}else{#
-  write("ERROR! The forward and reverse reads do not match",file=statsfile,append=TRUE)#
-  print("ERROR! The forward and reverse reads do not match")#
-}
-filtFs <- paste(filtFs_list,"_1.fastq",sep="")#
-  filtRs <- paste(filtFs_list,"_2.fastq",sep="")
-filtFs <- c(filtFs,paste(filtFs_rev_list,"_1.rev.fastq",sep=""))#
-  filtRs <- c(filtRs,paste(filtRs_rev_list,"_1.rev.fastq",sep=""))
-filtFs
 pattern="fastq"
 filtFs_list <- gsub(paste("_1.",pattern,sep=""),"",list.files(path = dir, pattern = paste("_1.",pattern,sep=""), full.names=TRUE))
 filtFs_list
@@ -383,218 +179,580 @@ mergedasvtable <- cbind(mergedasvtable, newcol)#
 head(mergedasvtable)
 setwd("/Users/anttonalberdi/github/microbiota_adaptation_review/")#
 #
-#WOS needs to be exported as Excel and then exported as comma-separated csv#
-#
-###############
-# 1- PREPARE DATA TABLES#
-###############
-#
-#Load raw data tables#
-scp_raw <- read.csv("data/scp_20211025.csv")#
-wos_raw <- read.csv("data/wos_20211025.csv")#
-#
-#Filter columns#
-scp <- scp_raw[,c("Title","Authors","Year","Document.Type","DOI","Abstract","Author.Keywords","Index.Keywords")]#
-colnames(scp) <- c("Title","Authors","Year","Type","DOI","Abstract","Keywords1","Keywords2")#
-wos <- wos_raw[,c("Article.Title","Authors","Publication.Year","Document.Type","DOI","Abstract","Author.Keywords","Keywords.Plus")]#
-colnames(wos) <- c("Title","Authors","Year","Type","DOI","Abstract","Keywords1","Keywords2")#
-#
-#Unify formats#
-scp[,2] <- gsub("\\.","",scp[,2])#
-wos[,2] <- gsub(",","",wos[,2])#
-wos[,2] <- gsub(";",",",wos[,2])#
-#
-#Merge datasets#
-all <- rbind(scp,wos)#
-#
-#Merge keywords#
-all$Keywords <- paste(all$Keywords1,all$Keywords2,sep="; ")#
-all <- all[,c("Title","Authors","Year","Type","DOI","Abstract","Keywords")]#
-all <- all[order(all$Title),]#
-#
-###############
-# 2- FILTER DUPLICATES#
-###############
-#
-#Filter by duplicated Title#
-all.uniq <- all[!duplicated(all[,"Title"]),]#
-#
-#Filter by duplicated DOI#
-all.uniq <- all.uniq[!duplicated(all.uniq[,"DOI"]),]#
-#
-#Filter by duplicated Abstract#
-all.uniq <- all.uniq[!duplicated(all.uniq[,"Abstract"]),]#
-#
-###############
-# 3- FILTER BY DOCUMENT TYPE#
-###############
-#
-#Print all document types#
-unique(all.uniq$Type)#
-#
-#Filter entries#
-all.filt_type <- all.uniq[all.uniq$Type %in% c("Article","Letter","Article in Press","Note","Short Survey","Reprint"),]#
-#
-###############
-# 4- FILTER BY KEYWORD#
-###############
-#
-allkeywords <- paste(shQuote(all.filt_type$Keywords), collapse="; ")#
-allkeywords <- gsub("\"","",allkeywords)#
-allkeywords <- sort(unlist(strsplit(allkeywords, split="; ")))
-allkeywordscounts <- table(allkeywords)
-allkeywordscounts
-head(allkeywordscounts)
-ncol(allkeywordscounts)
-head(allkeywords)
-allkeywords <- paste(shQuote(all.filt_type$Keywords), collapse="; ")#
-allkeywords <- gsub("\"","",allkeywords)#
-allkeywords <- sort(unlist(strsplit(allkeywords, split="; ")))
-head(allkeywords)
-head(allkeywords,100)
-head(allkeywords,1000)
-allkeywords <- paste(shQuote(all.filt_type$Keywords), collapse="; ")#
-allkeywords <- gsub("\"","",allkeywords)#
-allkeywords <- sort(unlist(strsplit(allkeywords, split="; ")))#
-allkeywordscounts <- as.data.frame(table(allkeywords))
-head(allkeywordscounts)
-allkeywordscounts <- allkeywordscounts[order(allkeywordscounts[,2]),]
-head(allkeywordscounts)
-allkeywords <- paste(shQuote(all.filt_type$Keywords), collapse="; ")#
-allkeywords <- gsub("\"","",allkeywords)#
-allkeywords <- sort(unlist(strsplit(allkeywords, split="; ")))#
-allkeywordscounts <- as.data.frame(table(allkeywords))#
-allkeywordscounts <- allkeywordscounts[order(allkeywordscounts[,2],descending=TRUE),]
-help(order)
-allkeywords <- paste(shQuote(all.filt_type$Keywords), collapse="; ")#
-allkeywords <- gsub("\"","",allkeywords)#
-allkeywords <- sort(unlist(strsplit(allkeywords, split="; ")))#
-allkeywordscounts <- as.data.frame(table(allkeywords))#
-allkeywordscounts <- allkeywordscounts[order(allkeywordscounts[,2],decreasing=TRUE),]
-head(allkeywordscounts)
-allkeywords <- paste(shQuote(all.filt_type$Keywords), collapse="; ")#
-allkeywords <- gsub("\"","",allkeywords)#
-allkeywords <- sort(unlist(strsplit(allkeywords, split="; ")))#
-allkeywordscounts <- as.data.frame(table(allkeywords))#
-allkeywordscounts <- allkeywordscounts[order(allkeywordscounts[,2],decreasing=TRUE),]#
-#
-#Display 100 most common keywords#
-head(allkeywordscounts,100)
-#Load raw data tables#
-scp_raw <- read.csv("data/scp_20211025.csv")#
-wos_raw <- read.csv("data/wos_20211025.csv")#
-#
-#Filter columns#
-scp <- scp_raw[,c("Title","Authors","Year","Document.Type","DOI","Abstract","Author.Keywords","Index.Keywords")]#
-colnames(scp) <- c("Title","Authors","Year","Type","DOI","Abstract","Keywords1","Keywords2")#
-wos <- wos_raw[,c("Article.Title","Authors","Publication.Year","Document.Type","DOI","Abstract","Author.Keywords","Keywords.Plus")]#
-colnames(wos) <- c("Title","Authors","Year","Type","DOI","Abstract","Keywords1","Keywords2")#
-#
-#Unify formats#
-scp[,2] <- gsub("\\.","",scp[,2])#
-wos[,2] <- gsub(",","",wos[,2])#
-wos[,2] <- gsub(";",",",wos[,2])#
-#
-#Merge datasets#
-all <- rbind(scp,wos)#
-#
-#Merge keywords#
-all$Keywords <- paste(all$Keywords1,all$Keywords2,sep="; ")#
-#
-#Merge text case#
-all$Keywords <- tolower(all$Keywords)#
-#
-#Rename and order#
-all <- all[,c("Title","Authors","Year","Type","DOI","Abstract","Keywords")]#
-all <- all[order(all$Title),]#
-#
-###############
-# 2- FILTER DUPLICATES#
-###############
-#
-#Filter by duplicated Title#
-all.uniq <- all[!duplicated(all[,"Title"]),]#
-#
-#Filter by duplicated DOI#
-all.uniq <- all.uniq[!duplicated(all.uniq[,"DOI"]),]#
-#
-#Filter by duplicated Abstract#
-all.uniq <- all.uniq[!duplicated(all.uniq[,"Abstract"]),]#
-#
-###############
-# 3- FILTER BY DOCUMENT TYPE#
-###############
-#
-#Print all document types#
-unique(all.uniq$Type)#
-#
-#Filter entries#
-all.filt_type <- all.uniq[all.uniq$Type %in% c("Article","Letter","Article in Press","Note","Short Survey","Reprint"),]#
-#
-###############
-# 4- FILTER BY KEYWORD#
-###############
-#
-allkeywords <- paste(shQuote(all.filt_type$Keywords), collapse="; ")#
-allkeywords <- gsub("\"","",allkeywords)#
-allkeywords <- sort(unlist(strsplit(allkeywords, split="; ")))#
-allkeywordscounts <- as.data.frame(table(allkeywords))#
-allkeywordscounts <- allkeywordscounts[order(allkeywordscounts[,2],decreasing=TRUE),]#
-#
-#Display 100 most common keywords#
-head(allkeywordscounts,100)
-all.filt_keywords <- all.filt_type[all.filt_type$Keywords ~ keywords_to_remove,]
-all.filt_keywords <- all.filt_type[all.filt_type$Keywords %in% keywords_to_remove,]
-keywords_to_remove <- c("mice, inbred c57bl","mice, knockout","c57bl mouse","knockout mouse","disease models, animal","colitis","disease model",)#
-#
-#Filter by keywords#
-all.filt_keywords <- all.filt_type[all.filt_type$Keywords %in% keywords_to_remove,]
-keywords_to_remove <- c("mice, inbred c57bl","mice, knockout","c57bl mouse","knockout mouse","disease models, animal","colitis","disease model",)
-keywords_to_remove <- c("mice, inbred c57bl","mice, knockout","c57bl mouse","knockout mouse","disease models, animal","colitis","disease model")
-all.filt_keywords <- all.filt_type[all.filt_type$Keywords %in% keywords_to_remove,]
-nrow(all.filt_keywords)
-all.filt_keywords <-  filter(all.filt_type, str_detect(Keywords, paste(keywords_to_remove, collapse="|")))
-library(dplyr)#
-library(stringr)
-all.filt_keywords <-  filter(all.filt_type, str_detect(Keywords, paste(keywords_to_remove, collapse="|")))
-nrow(all.filt_keywords)
-head(all.filt_keywords)
-all.filt_type[all.filt_type$Title == "6-Formylindolo (3, 2-b) Carbazole (FICZ)–mediated protection of gut barrier is dependent on T cells in a mouse model of alcohol combined with burn injury",7]
-all.filt_keywords <-  filter(all.filt_type, !str_detect(Keywords, paste(keywords_to_remove, collapse="|")))
-nrow(all.filt_keywords)
-write.csv(all.filt_type, "data/all_20211025.csv", row.names=FALSE)
 all <- read.csv("data/all_20211025.csv")
 head(all)
-sample(1:nrow(all),100)
-all.random <- all[sample(1:nrow(all),100),]
-all.random
-all.random <- all[sample(1:nrow(all),100,seed=15),]
-help(sample)
-all.random <- all[sample(1:nrow(all),200),]
-all.random <- all[sample(1:nrow(all),200),]#
-write.csv(all.random,"data/all_20211025_random200.csv")
-write.csv(all.random,"data/all_20211025_random200.csv",row.names=FALSE)
-all.random <- read.csv("data/all_20211025_random200.csv")
-head(all.random)
-all.random <- read.csv("data/all_20211025_random200.csv")#
-all.random <- all.random[,c("Title","DOI","Keywords")]
-head(all.random)
+all.random <- read.csv("data/all_20211025_random200_test.csv")#
+all.random <- all.random[,c("Title","DOI","Keywords")]#
+#
+#Get all keywords#
 allkeywords <- paste(shQuote(all.random$Keywords), collapse="; ")#
 allkeywords <- gsub("\"","",allkeywords)#
-allkeywords <- sort(unlist(strsplit(allkeywords, split="; ")))
-head(allkeywords)
-©allkeywords <- paste(shQuote(all.random$Keywords), collapse="; ")#
-allkeywords <- gsub("\"","",allkeywords)#
-allkeywords <- unique(sort(unlist(strsplit(allkeywords, split="; "))))
-allkeywords <- paste(shQuote(all.random$Keywords), collapse="; ")#
-allkeywords <- gsub("\"","",allkeywords)#
-allkeywords <- unique(sort(unlist(strsplit(allkeywords, split="; "))))
-head(allkeywords)
-matrix(ncol=length(allkeywords+3),nrow=nrow(all.random))
-matrix(ncol=length(allkeywords)+3,nrow=nrow(all.random))
-colnames(all.matrix) <- c(c("Title","DOI","Result"),allkeywords)
+allkeywords <- unique(sort(unlist(strsplit(allkeywords, split="; "))))#
+#
+#Create keyword matrix#
 all.matrix <- matrix(ncol=length(allkeywords)+3,nrow=nrow(all.random))#
-colnames(all.matrix) <- c(c("Title","DOI","Result"),allkeywords)
-head(all.matrix)
+colnames(all.matrix) <- c(c("Title","DOI","Result"),allkeywords)#
 rownames(all.matrix) <- all.random$DOI
+head(all.matrix)
+d=10.1007/s10482-016-0698-1
+d="10.1007/s10482-016-0698-1"
+all.random[d,"Keywords"
+]
+all.random[d,]
+all.matrix[d,"Keywords"]
+#Create keyword matrix#
+all.matrix <- matrix(ncol=length(allkeywords)+4,nrow=nrow(all.random))#
+colnames(all.matrix) <- c(c("Title","DOI","Result","Keywords"),allkeywords)#
+rownames(all.matrix) <- all.random$DOI
+all.matrix[d,"Keywords"]
+all.matrix <- matrix(ncol=length(allkeywords),nrow=nrow(all.random))#
+colnames(all.matrix) <- allkeywords#
+rownames(all.matrix) <- all.random$DOI
+head(all.random )
+all.random <- all.random[,c("Title","DOI","Keywords")]#
+rownames(all.random) <- all.random$DOI
+all.random[d,"Keywords"]
+str_split(all.random[d,"Keywords"], ";")
+library(stringr)
+str_split(all.random[d,"Keywords"], ";")
+gsub("^ ","",str_split(all.random[d,"Keywords"], ";"))
+trimws(str_split(all.random[d,"Keywords"], ";"))
+str_split(all.random[d,"Keywords"], ";")
+unlist(str_split(all.random[d,"Keywords"], ";")))
+str_split(all.random[d,"Keywords"], ";"))
+unlist(str_split(all.random[d,"Keywords"], ";")))
+unlist(str_split(all.random[d,"Keywords"], ";"))
+trimws(unlist(str_split(all.random[d,"Keywords"], ";")))
+all.matrix[d,k] %in% trimws(unlist(str_split(all.random[d,"Keywords"], ";")))
+k=allkeywords[1]
+all.matrix[d,k] %in% trimws(unlist(str_split(all.random[d,"Keywords"], ";")))
+all.matrix[d,k]
+k %in% trimws(unlist(str_split(all.random[d,"Keywords"], ";")))
+#Create keyword matrix#
+all.matrix <- matrix(ncol=length(allkeywords),nrow=nrow(all.random))#
+colnames(all.matrix) <- allkeywords#
+rownames(all.matrix) <- all.random$DOI#
+#
+#Populate matrix#
+for (d in all.random$DOI){#
+  for (k in allkeywords){#
+    if(k %in% trimws(unlist(str_split(all.random[d,"Keywords"], ";")))){#
+      all.matrix[d,k] = 1#
+    }else{#
+      all.matrix[d,k] = 0#
+    }#
+}
+for (d in all.random$DOI){#
+  for (k in allkeywords){#
+    if(k %in% trimws(unlist(str_split(all.random[d,"Keywords"], ";")))){#
+      all.matrix[d,k] = 1#
+    }else{#
+      all.matrix[d,k] = 0#
+    }#
+}#
+}
+for (d in all.random$DOI){#
+  for (k in allkeywords){#
+    if(k %in% trimws(unlist(str_split(all.random[d,"Keywords"], ";")))){#
+      all.matrix[d,k] = 1#
+    }else{#
+      all.matrix[d,k] = 0#
+    }#
+}#
+}
+d
+k
+allkeywords
+k %in% trimws(unlist(str_split(all.random[d,"Keywords"], ";")))
+all.matrix[d,k]
+head(all.matrix)
+allkeywords <- paste(shQuote(all.random$Keywords), collapse="; ")#
+allkeywords <- gsub("\"","",allkeywords)#
+allkeywords <- unique(sort(unlist(strsplit(allkeywords, split="; "))))#
+allkeywords <- allkeywords[complete.cases(allkeywords)]
+head(allkeywords)
+allkeywords <- paste(shQuote(all.random$Keywords), collapse="; ")#
+allkeywords <- gsub("\"","",allkeywords)#
+allkeywords <- unique(sort(unlist(strsplit(allkeywords, split="; "))))#
+allkeywords <- allkeywords[allkeywords != ""]
+head(allkeywords)
+#Create keyword matrix#
+all.matrix <- matrix(ncol=length(allkeywords),nrow=nrow(all.random))#
+colnames(all.matrix) <- allkeywords#
+rownames(all.matrix) <- all.random$DOI#
+#
+#Populate matrix#
+for (d in all.random$DOI){#
+  for (k in allkeywords){#
+    if(k %in% trimws(unlist(str_split(all.random[d,"Keywords"], ";")))){#
+      all.matrix[d,k] = 1#
+    }else{#
+      all.matrix[d,k] = 0#
+    }#
+}#
+}
+head(all.matrix)
+all.random <- read.csv("data/all_20211025_random200_test.csv")#
+all.random <- all.random[,c("Title","DOI","Keywords","Response")]#
+rownames(all.random) <- all.random$DOI#
+#
+#Get all keywords#
+allkeywords <- paste(shQuote(all.random$Keywords), collapse="; ")#
+allkeywords <- gsub("\"","",allkeywords)#
+allkeywords <- unique(sort(unlist(strsplit(allkeywords, split="; "))))#
+allkeywords <- allkeywords[allkeywords != ""]#
+#
+#Create keyword matrix#
+all.matrix <- matrix(ncol=length(allkeywords),nrow=nrow(all.random))#
+colnames(all.matrix) <- allkeywords#
+rownames(all.matrix) <- all.random$DOI
+all.matrix$Response_variable <- all.random$Response
+head(all.random$Response)
+all.matrix$Response_variable
+all.matrix
+all.random$Response
+###############
+all.random <- read.csv("data/all_20211025_random200_test.csv")#
+all.random <- all.random[,c("Title","DOI","Keywords","Response")]#
+rownames(all.random) <- all.random$DOI#
+#
+#Get all keywords#
+allkeywords <- paste(shQuote(all.random$Keywords), collapse="; ")#
+allkeywords <- gsub("\"","",allkeywords)#
+allkeywords <- unique(sort(unlist(strsplit(allkeywords, split="; "))))#
+allkeywords <- allkeywords[allkeywords != ""]#
+#
+#Create keyword matrix#
+all.matrix <- matrix(ncol=length(allkeywords),nrow=nrow(all.random))#
+colnames(all.matrix) <- allkeywords#
+rownames(all.matrix) <- all.random$DOI#
+#
+#Populate matrix#
+for (d in all.random$DOI){#
+  for (k in allkeywords){#
+    if(k %in% trimws(unlist(str_split(all.random[d,"Keywords"], ";")))){#
+      all.matrix[d,k] = 1#
+    }else{#
+      all.matrix[d,k] = 0#
+    }#
+}#
+}#
+#
+#Add response colum#
+all.matrix <- as.data.frame(all.matrix)#
+all.matrix$Response_variable <- all.random$Response
+head(all.matrix)
+split <- sample(1:nrow(all.matrix),nrow(all.matrix)*0.4)
+split
+split <- sample(1:nrow(all.matrix),nrow(all.matrix)*0.4)#
+train <- all.matrix[split,]#
+test <- all.matrix[-split,]
+nrow(train)
+nrow(test)
+library(caret)
+install.packages(caret)
+install.packages("caret")
+library(caret)
+folds <- 7#
+cvIndex <- createMultiFolds(factor(train$Response), folds, times=100)#
+cv <- trainControl(method="repeatedcv",#
+                     number=folds,#
+                     index = cvIndex,#
+                     returnResamp="final",#
+                     classProbs=TRUE,#
+                     summaryFunction=twoClassSummary,#
+                     indexFinal=NULL,#
+                     savePredictions = TRUE)
+cv
+#TuneGrids#
+grid_rf <-  expand.grid(mtry = c(80,500,1000,1500))#
+grid_lr <- expand.grid(cost = c(0.0001, 0.001, 0.0025, 0.005, 0.01, 0.05, 0.1, 0.25, 0.5, 1, 10), #
+  loss = "L2_primal", #
+  epsilon = 0.01)#
+grid_xgb <-  expand.grid(nrounds=500,#
+  gamma=0,#
+  eta=c(0.001, 0.01, 0.1, 1),#
+  max_depth=8,#
+  colsample_bytree= 0.8,#
+  min_child_weight=1,#
+  subsample=c(0.4, 0.5, 0.6, 0.7))
+tuneList <- list(#
+  rf=caretModelSpec(method="rf", tuneGrid=grid_rf),#
+  lr=caretModelSpec(method="regLogistic", tuneGrid=grid_lr),#
+  xgb=caretModelSpec(method="xgbTree", tuneGrid=grid_xgb))
+install.packages("caretEnsemble")
+library(caretEnsemble)
+tuneList <- list(#
+  rf=caretModelSpec(method="rf", tuneGrid=grid_rf),#
+  lr=caretModelSpec(method="regLogistic", tuneGrid=grid_lr),#
+  xgb=caretModelSpec(method="xgbTree", tuneGrid=grid_xgb))
+model_list <- caretList(#
+  Response~., data=train,#
+  trControl=cv,#
+  methodList=c("rf", "regLogistic","xgbTree"),#
+  tuneList=tuneList)
+head(train)
+folds <- 7#
+cvIndex <- createMultiFolds(factor(train$Response_variable), folds, times=100)#
+cv <- trainControl(method="repeatedcv",#
+                     number=folds,#
+                     index = cvIndex,#
+                     returnResamp="final",#
+                     classProbs=TRUE,#
+                     summaryFunction=twoClassSummary,#
+                     indexFinal=NULL,#
+                     savePredictions = TRUE)
+#TuneGrids#
+grid_rf <-  expand.grid(mtry = c(80,500,1000,1500))#
+grid_lr <- expand.grid(cost = c(0.0001, 0.001, 0.0025, 0.005, 0.01, 0.05, 0.1, 0.25, 0.5, 1, 10), #
+  loss = "L2_primal", #
+  epsilon = 0.01)#
+grid_xgb <-  expand.grid(nrounds=500,#
+  gamma=0,#
+  eta=c(0.001, 0.01, 0.1, 1),#
+  max_depth=8,#
+  colsample_bytree= 0.8,#
+  min_child_weight=1,#
+  subsample=c(0.4, 0.5, 0.6, 0.7))#
+#
+tuneList <- list(#
+  rf=caretModelSpec(method="rf", tuneGrid=grid_rf),#
+  lr=caretModelSpec(method="regLogistic", tuneGrid=grid_lr),#
+  xgb=caretModelSpec(method="xgbTree", tuneGrid=grid_xgb))#
+#
+model_list <- caretList(#
+  Response_variable~., data=train,#
+  trControl=cv,#
+  methodList=c("rf", "regLogistic","xgbTree"),#
+  tuneList=tuneList)
+#TuneGrids#
+grid_rf <-  expand.grid(mtry = c(80,500,1000,1500))#
+grid_lr <- expand.grid(cost = c(0.0001, 0.001, 0.0025, 0.005, 0.01, 0.05, 0.1, 0.25, 0.5, 1, 10), #
+  loss = "L2_primal", #
+  epsilon = 0.01)#
+grid_xgb <-  expand.grid(nrounds=500,#
+  gamma=0,#
+  eta=c(0.001, 0.01, 0.1, 1),#
+  max_depth=8,#
+  colsample_bytree= 0.8,#
+  min_child_weight=1,#
+  subsample=c(0.4, 0.5, 0.6, 0.7))#
+#
+tuneList <- list(#
+  rf=caretModelSpec(method="rf", tuneGrid=grid_rf),#
+  lr=caretModelSpec(method="regLogistic", tuneGrid=grid_lr),#
+  xgb=caretModelSpec(method="xgbTree", tuneGrid=grid_xgb))#
+#
+model_list <- caretList(#
+  Response_variable~., data=train,#
+  trControl=cv,#
+  methodList=c("rf", "regLogistic","xgbTree"),#
+  tuneList=tuneList)
+results <- resamples(model_list[c(1:3)])
+split <- sample(1:nrow(all.matrix),nrow(all.matrix)*0.4)#
+train <- all.matrix[split,]#
+train$Response_variable <- as.factor(as.character(train$Response_variable))#
+test <- all.matrix[-split,]#
+test$Response_variable <- as.factor(as.character(test$Response_variable))#
+#
+folds <- 7#
+cvIndex <- createMultiFolds(factor(train$Response_variable), folds, times=100)#
+cv <- trainControl(method="repeatedcv",#
+                     number=folds,#
+                     index = cvIndex,#
+                     returnResamp="final",#
+                     classProbs=TRUE,#
+                     summaryFunction=twoClassSummary,#
+                     indexFinal=NULL,#
+                     savePredictions = TRUE)#
+#TuneGrids#
+grid_rf <-  expand.grid(mtry = c(80,500,1000,1500))#
+grid_lr <- expand.grid(cost = c(0.0001, 0.001, 0.0025, 0.005, 0.01, 0.05, 0.1, 0.25, 0.5, 1, 10), #
+  loss = "L2_primal", #
+  epsilon = 0.01)#
+grid_xgb <-  expand.grid(nrounds=500,#
+  gamma=0,#
+  eta=c(0.001, 0.01, 0.1, 1),#
+  max_depth=8,#
+  colsample_bytree= 0.8,#
+  min_child_weight=1,#
+  subsample=c(0.4, 0.5, 0.6, 0.7))#
+#
+tuneList <- list(#
+  rf=caretModelSpec(method="rf", tuneGrid=grid_rf),#
+  lr=caretModelSpec(method="regLogistic", tuneGrid=grid_lr),#
+  xgb=caretModelSpec(method="xgbTree", tuneGrid=grid_xgb))#
+#
+model_list <- caretList(#
+  Response_variable~., data=train,#
+  trControl=cv,#
+  methodList=c("rf", "regLogistic","xgbTree"),#
+  tuneList=tuneList)
+head(train)
+train$Response_variable
+model_list <- caretList(#
+  Response_variable~., data=train,#
+  trControl=cv,#
+  methodList=c("rf", "regLogistic","xgbTree"),#
+  tuneList=tuneList)
+model_list
+all.random <- read.csv("data/all_20211025_random200_test.csv")#
+all.random <- all.random[,c("Title","DOI","Keywords","Response")]#
+rownames(all.random) <- all.random$DOI#
+#
+#Get all keywords#
+allkeywords <- paste(shQuote(all.random$Keywords), collapse="; ")#
+allkeywords <- gsub("\"","",allkeywords)#
+allkeywords <- unique(sort(unlist(strsplit(allkeywords, split="; "))))#
+allkeywords <- allkeywords[allkeywords != ""]#
+#
+#Create keyword matrix#
+all.matrix <- matrix(ncol=length(allkeywords),nrow=nrow(all.random))#
+colnames(all.matrix) <- allkeywords#
+rownames(all.matrix) <- all.random$DOI#
+#
+#Populate matrix#
+for (d in all.random$DOI){#
+  for (k in allkeywords){#
+    if(k %in% trimws(unlist(str_split(all.random[d,"Keywords"], ";")))){#
+      all.matrix[d,k] = "Yes"#
+    }else{#
+      all.matrix[d,k] = "No"#
+    }#
+}#
+}#
+#
+#Add response colum#
+all.matrix <- as.data.frame(all.matrix)#
+all.matrix$Response_variable <- all.random$Response
+split <- sample(1:nrow(all.matrix),nrow(all.matrix)*0.4)#
+train <- all.matrix[split,]#
+train$Response_variable <- as.factor(as.character(train$Response_variable))#
+test <- all.matrix[-split,]#
+test$Response_variable <- as.factor(as.character(test$Response_variable))#
+#
+folds <- 7#
+cvIndex <- createMultiFolds(factor(train$Response_variable), folds, times=100)#
+cv <- trainControl(method="repeatedcv",#
+                     number=folds,#
+                     index = cvIndex,#
+                     returnResamp="final",#
+                     classProbs=TRUE,#
+                     summaryFunction=twoClassSummary,#
+                     indexFinal=NULL,#
+                     savePredictions = TRUE)#
+#TuneGrids#
+grid_rf <-  expand.grid(mtry = c(80,500,1000,1500))#
+grid_lr <- expand.grid(cost = c(0.0001, 0.001, 0.0025, 0.005, 0.01, 0.05, 0.1, 0.25, 0.5, 1, 10),#
+  loss = "L2_primal",#
+  epsilon = 0.01)#
+grid_xgb <-  expand.grid(nrounds=500,#
+  gamma=0,#
+  eta=c(0.001, 0.01, 0.1, 1),#
+  max_depth=8,#
+  colsample_bytree= 0.8,#
+  min_child_weight=1,#
+  subsample=c(0.4, 0.5, 0.6, 0.7))#
+#
+tuneList <- list(#
+  rf=caretModelSpec(method="rf", tuneGrid=grid_rf),#
+  lr=caretModelSpec(method="regLogistic", tuneGrid=grid_lr),#
+  xgb=caretModelSpec(method="xgbTree", tuneGrid=grid_xgb))#
+#
+model_list <- caretList(#
+  Response_variable~., data=train,#
+  trControl=cv,#
+  methodList=c("rf", "regLogistic","xgbTree"),#
+  tuneList=tuneList)
+train$Response_variable
+all.random <- read.csv("data/all_20211025_random200_test.csv")#
+all.random <- all.random[,c("Title","DOI","Keywords","Response")]#
+rownames(all.random) <- all.random$DOI
+all.matrix$Response_variable <- all.random$Response
+all.matrix$Response_variable
+split <- sample(1:nrow(all.matrix),nrow(all.matrix)*0.4)#
+train <- all.matrix[split,]#
+train$Response_variable <- as.factor(as.character(train$Response_variable))#
+test <- all.matrix[-split,]#
+test$Response_variable <- as.factor(as.character(test$Response_variable))#
+#
+folds <- 7#
+cvIndex <- createMultiFolds(factor(train$Response_variable), folds, times=100)#
+cv <- trainControl(method="repeatedcv",#
+                     number=folds,#
+                     index = cvIndex,#
+                     returnResamp="final",#
+                     classProbs=TRUE,#
+                     summaryFunction=twoClassSummary,#
+                     indexFinal=NULL,#
+                     savePredictions = TRUE)#
+#TuneGrids#
+grid_rf <-  expand.grid(mtry = c(80,500,1000,1500))#
+grid_lr <- expand.grid(cost = c(0.0001, 0.001, 0.0025, 0.005, 0.01, 0.05, 0.1, 0.25, 0.5, 1, 10),#
+  loss = "L2_primal",#
+  epsilon = 0.01)#
+grid_xgb <-  expand.grid(nrounds=500,#
+  gamma=0,#
+  eta=c(0.001, 0.01, 0.1, 1),#
+  max_depth=8,#
+  colsample_bytree= 0.8,#
+  min_child_weight=1,#
+  subsample=c(0.4, 0.5, 0.6, 0.7))#
+#
+tuneList <- list(#
+  rf=caretModelSpec(method="rf", tuneGrid=grid_rf),#
+  lr=caretModelSpec(method="regLogistic", tuneGrid=grid_lr),#
+  xgb=caretModelSpec(method="xgbTree", tuneGrid=grid_xgb))#
+#
+model_list <- caretList(#
+  Response_variable~., data=train,#
+  trControl=cv,#
+  methodList=c("rf", "regLogistic","xgbTree"),#
+  tuneList=tuneList)
+train$Response_variable
+test$Response_variable
+split <- sample(1:nrow(all.matrix),nrow(all.matrix)*0.6)#
+train <- all.matrix[split,]#
+train$Response_variable <- as.factor(as.character(train$Response_variable))#
+test <- all.matrix[-split,]#
+test$Response_variable <- as.factor(as.character(test$Response_variable))#
+#
+folds <- 7#
+cvIndex <- createMultiFolds(factor(train$Response_variable), folds, times=100)#
+cv <- trainControl(method="repeatedcv",#
+                     number=folds,#
+                     index = cvIndex,#
+                     returnResamp="final",#
+                     classProbs=TRUE,#
+                     summaryFunction=twoClassSummary,#
+                     indexFinal=NULL,#
+                     savePredictions = TRUE)#
+#TuneGrids#
+grid_rf <-  expand.grid(mtry = c(80,500,1000,1500))#
+grid_lr <- expand.grid(cost = c(0.0001, 0.001, 0.0025, 0.005, 0.01, 0.05, 0.1, 0.25, 0.5, 1, 10),#
+  loss = "L2_primal",#
+  epsilon = 0.01)#
+grid_xgb <-  expand.grid(nrounds=500,#
+  gamma=0,#
+  eta=c(0.001, 0.01, 0.1, 1),#
+  max_depth=8,#
+  colsample_bytree= 0.8,#
+  min_child_weight=1,#
+  subsample=c(0.4, 0.5, 0.6, 0.7))#
+#
+tuneList <- list(#
+  rf=caretModelSpec(method="rf", tuneGrid=grid_rf),#
+  lr=caretModelSpec(method="regLogistic", tuneGrid=grid_lr),#
+  xgb=caretModelSpec(method="xgbTree", tuneGrid=grid_xgb))#
+#
+model_list <- caretList(#
+  Response_variable~., data=train,#
+  trControl=cv,#
+  methodList=c("rf", "regLogistic","xgbTree"),#
+  tuneList=tuneList)
+train$Response_variable
+test$Response_variable
+factor(train$Response_variable)
+all.random <- read.csv("data/all_20211025_random200_test.csv")#
+all.random <- all.random[,c("Title","DOI","Keywords","Response")]#
+rownames(all.random) <- all.random$DOI#
+#
+#Get all keywords#
+allkeywords <- paste(shQuote(all.random$Keywords), collapse="; ")#
+allkeywords <- gsub("\"","",allkeywords)#
+allkeywords <- unique(sort(unlist(strsplit(allkeywords, split="; "))))#
+allkeywords <- allkeywords[allkeywords != ""]#
+#
+#Create keyword matrix#
+all.matrix <- matrix(ncol=length(allkeywords),nrow=nrow(all.random))#
+colnames(all.matrix) <- allkeywords#
+rownames(all.matrix) <- all.random$DOI#
+#
+#Populate matrix#
+for (d in all.random$DOI){#
+  for (k in allkeywords){#
+    if(k %in% trimws(unlist(str_split(all.random[d,"Keywords"], ";")))){#
+      all.matrix[d,k] = 1#
+    }else{#
+      all.matrix[d,k] = 0#
+    }#
+}#
+}
+rowSums(all.matrix)
+nrow(all.matrix)
+all.matrix <- all.matrix[rowSums(all.matrix) != 0,]
+nrow(all.matrix)
+all.matrix$Response_variable <- all.random[rownames(all.matrix),"Response"]
+all.random <- read.csv("data/all_20211025_random200_test.csv")#
+all.random <- all.random[,c("Title","DOI","Keywords","Response")]#
+rownames(all.random) <- all.random$DOI#
+#
+#Get all keywords#
+allkeywords <- paste(shQuote(all.random$Keywords), collapse="; ")#
+allkeywords <- gsub("\"","",allkeywords)#
+allkeywords <- unique(sort(unlist(strsplit(allkeywords, split="; "))))#
+allkeywords <- allkeywords[allkeywords != ""]#
+#
+#Create keyword matrix#
+all.matrix <- matrix(ncol=length(allkeywords),nrow=nrow(all.random))#
+colnames(all.matrix) <- allkeywords#
+rownames(all.matrix) <- all.random$DOI#
+#
+#Populate matrix#
+for (d in all.random$DOI){#
+  for (k in allkeywords){#
+    if(k %in% trimws(unlist(str_split(all.random[d,"Keywords"], ";")))){#
+      all.matrix[d,k] = 1#
+    }else{#
+      all.matrix[d,k] = 0#
+    }#
+}#
+}
+all.random[rownames(all.matrix),"Response"]
+all.matrix <- as.data.frame(all.matrix)#
+all.matrix <- all.matrix[rowSums(all.matrix) != 0,]
+all.random[rownames(all.matrix),"Response"]
+all.matrix$Response_variable <- all.random[rownames(all.matrix),"Response"]
+#######
+#
+split <- sample(1:nrow(all.matrix),nrow(all.matrix)*0.6)#
+train <- all.matrix[split,]#
+train$Response_variable <- as.factor(as.character(train$Response_variable))#
+test <- all.matrix[-split,]#
+test$Response_variable <- as.factor(as.character(test$Response_variable))#
+#
+folds <- 7#
+cvIndex <- createMultiFolds(factor(train$Response_variable), folds, times=100)#
+cv <- trainControl(method="repeatedcv",#
+                     number=folds,#
+                     index = cvIndex,#
+                     returnResamp="final",#
+                     classProbs=TRUE,#
+                     summaryFunction=twoClassSummary,#
+                     indexFinal=NULL,#
+                     savePredictions = TRUE)#
+#TuneGrids#
+grid_rf <-  expand.grid(mtry = c(80,500,1000,1500))#
+grid_lr <- expand.grid(cost = c(0.0001, 0.001, 0.0025, 0.005, 0.01, 0.05, 0.1, 0.25, 0.5, 1, 10),#
+  loss = "L2_primal",#
+  epsilon = 0.01)#
+grid_xgb <-  expand.grid(nrounds=500,#
+  gamma=0,#
+  eta=c(0.001, 0.01, 0.1, 1),#
+  max_depth=8,#
+  colsample_bytree= 0.8,#
+  min_child_weight=1,#
+  subsample=c(0.4, 0.5, 0.6, 0.7))#
+#
+tuneList <- list(#
+  rf=caretModelSpec(method="rf", tuneGrid=grid_rf),#
+  lr=caretModelSpec(method="regLogistic", tuneGrid=grid_lr),#
+  xgb=caretModelSpec(method="xgbTree", tuneGrid=grid_xgb))#
+#
+model_list <- caretList(#
+  Response_variable~., data=train,#
+  trControl=cv,#
+  methodList=c("rf", "regLogistic","xgbTree"),#
+  tuneList=tuneList)
+head(all.random)
 head(all.matrix)
