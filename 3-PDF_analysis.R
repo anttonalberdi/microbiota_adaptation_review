@@ -10,11 +10,8 @@ keywords = c('wild', 'fitness', 'adaptation')
 doi="10.3389_fimmu.2020.585431"
 
 #Screen PDF
-pdffile <- pdftools::pdf_text(paste0("papers/",doi,".pdf"),split_pdf=TRUE)
+pdffile <- pdftools::pdf_text(paste0("papers/",doi,".pdf"))
 key_res <- keyword_search(pdffile, keyword = keywords)
-
-
-headings <- heading_search(pdffile, headings = c('METHODS', 'INTRODUCTION')) 
 
 #Keyword matrix
 table(key_res[1])
