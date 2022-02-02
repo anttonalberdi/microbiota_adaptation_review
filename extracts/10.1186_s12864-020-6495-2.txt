@@ -1,0 +1,3 @@
+"","Counts"
+"adaptation",8
+"wild",10

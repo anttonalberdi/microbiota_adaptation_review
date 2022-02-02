@@ -1,0 +1,4 @@
+"","Counts"
+"adaptation",6
+"fitness",1
+"wild",23

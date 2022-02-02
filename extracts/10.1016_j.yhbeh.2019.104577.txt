@@ -1,0 +1,3 @@
+"","Counts"
+"fitness",22
+"wild",16
