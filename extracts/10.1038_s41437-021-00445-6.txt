@@ -1,4 +1,6 @@
 "","Counts"
 "adaptation",4
 "fitness",3
+"inbred",2
+"model",4
 "wild",30

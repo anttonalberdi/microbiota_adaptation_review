@@ -55,3 +55,8 @@
 "54","adaptation","This is especially true when considering unique human physiological adaptations and dietary shifts across evolutionary time, which may lead to further deviation of response in the gut microbiome. "
 "55","adaptation","Ecological adaptations of temperate primates: Population density of Japanese macaques. "
 "56","adaptation","Characterization of the gut microbiota in six geographical populations of Chinese rhesus macaques (Macaca mulatta), implying an adaptation to high‐altitude environment. "
+"57","model","To find the indicator bacterial taxa for the level of human disturbance experienced by the macaques, we analyzed the data set at different taxonomic rank using regression random forest model through R packages randomForest and caret. "
+"58","model","3.4 | Gut bacterial taxa related to availability of anthropogenic food to macaques To find the potential bacterial indicator, we analyzed using random forest model and check if the picked bacterial taxa could correctly predict the disturbance level of the samples. "
+"59","model","Additionally, the differential responses exhibited by Japanese macaques may also mean that more cautions should be taken when using NHP models for inferring the host–gut microbiome relationship of humans. "
+"60","model","Associations between nutrition, gut microbiome, and health in a novel nonhuman primate model. "
+"61","model","High‐fat maternal diet during pregnancy persistently alters the offspring microbiome in a primate model. "

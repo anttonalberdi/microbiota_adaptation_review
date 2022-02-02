@@ -9,7 +9,7 @@ setwd("/Users/anttonalberdi/github/microbiota_adaptation_review/")
 ####
 # Define keywords
 ####
-keywords = c('wild', 'fitness', 'adaptation')
+keywords = c('wild', 'fitness', 'adaptation','mutant','inbred','model','c57bl','knockout','disease model')
 
 ####
 # Get list of dois
@@ -20,6 +20,8 @@ doilist <- gsub(".pdf","",doilist)
 ####
 # Iterate across dois
 ####
+
+statstable <- c()
 
 for(doi in doilist){
 
@@ -76,3 +78,31 @@ for(doi in doilist){
         }
     }
 }
+
+####
+# Get statistics
+####
+
+doilist <- list.files(path = "extracts", pattern = ".txt",full.names=FALSE)
+doilist <- gsub(".txt","",doilist)
+
+#Create empty stats table
+statstable <- c()
+
+for(doi in doilist){
+stats <- read.table(paste0("extracts/",doi,".txt"),header=TRUE,sep=",")
+
+#Get stats
+countsvector <- c()
+for(key in keywords){
+  counts <- stats[stats$X == key,"Counts"]
+  if(length(counts)==0){counts=0}
+  countsvector <- c(countsvector,counts)
+}
+
+#Add stats to table
+statstable <- rbind(statstable,countsvector)
+}
+
+colnames(statstable) <- keywords
+rownames(statstable) <- doilist

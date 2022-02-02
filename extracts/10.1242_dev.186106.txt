@@ -1,3 +1,5 @@
 "","Counts"
 "fitness",1
+"model",3
+"mutant",5
 "wild",20

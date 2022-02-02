@@ -10,3 +10,5 @@
 "9","wild","Therefore, further investigations into the presence of Blastocystis and associated microbial profiles across a range of host taxa in captivity and wild populations will hopefully shed light on the roles of protozoal colonisation and resulting impacts this may pose for conservation efforts. "
 "10","wild","Institutional Review Board Statement: Some water voles in this study were part of a re-introduction project with a wildlife trust and other partners. "
 "11","fitness","A common objective of animal studies has been to explore the extent of bacterial community perturbations in the gut caused by anthropogenic intervention and investigate resulting ramifications on animal fitness and longevity [13–18]. "
+"12","model","Recent studies have showcased that water voles constitute an attractive model for examining these questions [22,23]. "
+"13","model","This method was implemented in addition to classical univariate analysis as it is specifically designed to address normalisation and biases in measurements across taxonomic features by way of a zeroinflated Gaussian distribution model to account for the variety in sequencing depth. "

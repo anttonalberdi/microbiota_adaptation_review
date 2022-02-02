@@ -1,2 +1,5 @@
 "","Counts"
+"knockout",2
+"model",22
+"mutant",18
 "wild",26

@@ -1,4 +1,7 @@
 "","Counts"
 "adaptation",3
 "fitness",4
+"knockout",1
+"model",14
+"mutant",15
 "wild",33

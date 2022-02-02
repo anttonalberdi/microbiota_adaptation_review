@@ -136,3 +136,5 @@
 "135","fitness","Another group utilized genetically modified R. rhodnii and Escherichia coli to induce RNA interference to affect redox state in the gut and reduce vector fitness [22]. "
 "136","fitness","Wolbachia is a symbiont of many other insect species that act as vectors of human pathogens and has been found to be important for vector fitness and to influence the carriage of human pathogens by these vectors [13–15, 49–54]. "
 "137","fitness","Numerous examples of the relevance of environmentally-acquired extracellular microbes to other insects’ fitness exist (reviewed here [65]). "
+"138","model","DESeq2 makes use of negative binomial generalized linear models and incorporates data-driven prior distributions to estimate dispersion and logarithmic fold changes between sample groupings [47]. "
+"139","model","Colonization resistance and microbial ecophysiology: using gnotobiotic mouse models and single-cell technology to explore the intestinal jungle. "

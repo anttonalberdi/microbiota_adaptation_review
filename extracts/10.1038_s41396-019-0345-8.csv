@@ -110,3 +110,7 @@
 "109","fitness","Future studies should examine the fitness consequences associated with the presence/absence of microbes that are characteristic of GMCs of wild populations to gain a better understanding of environment–microbe–host evolutionary and ecological relationships. "
 "110","fitness","The impact of Ruminococcaceae (particularly Oscillospira) and Helicobacteraceae on host fitness should be further studied since these families are prominent in GMC of wild deer mice, yet only maintain lower relative abundances in captivity. "
 "111","adaptation","Metabolic adaptation to a high-fat diet is associated with a change in the gut microbiota. "
+"112","inbred","Gastrointestinal microbiota of wild and inbred individuals of two house mouse subspecies assessed using high throughput parallel pyrosequencing. "
+"113","model","For Chao1 and Fisher α-diversity indices ANOVA models and post-hoc Tukey tests were used to determine differences in αdiversity betweenand within-experimental groups, during initial and post-translocation sampling phases. "
+"114","model","Statistical differences between group GMCs and litters (for captive-born deer mice) were tested together using adonis (PERMANOVA) models, with 9999 permutations and reported F, R2 and p values, to determine if there were significant differences between captive and wild GMCs. "
+"115","model","Exercise prevents weight gain and alters the gut microbiota in a mouse model of high fat diet-induced obesity. "

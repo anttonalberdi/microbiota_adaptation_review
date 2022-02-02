@@ -1,3 +1,6 @@
 "","Counts"
 "adaptation",1
+"inbred",1
+"knockout",8
+"model",3
 "wild",30

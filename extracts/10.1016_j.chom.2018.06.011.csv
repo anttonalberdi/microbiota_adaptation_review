@@ -12,3 +12,7 @@
 "11","fitness","DspE, an AvrE homolog in the plant pathogen Erwinia amylovora, functions similarly to AvrE (Bogdanove et al., 1998), pointing to many pathogens relying on the AvrE mechanism to enhance their fitness. "
 "12","fitness","The Pseudomonas syringae Hrp pathogenicity island has a tripartite mosaic structure composed of a cluster of type III secretion genes bounded by exchangeable effector and conserved effector loci that contribute to parasitic fitness and pathogenicity in plants. "
 "13","adaptation","Maladaptation in wild populations of the generalist plant pathogen Pseudomonas syringae. "
+"14","model","While several soybean cultivars can recognize the activity of AvrE (Kobayashi et al., 1989), gene-forgene resistance to the avrE-containing Pst DC3000 model pathogen has so far not been found in A. thaliana (Velásquez et al., 2017). "
+"15","model","Gene prediction with a hidden Markov model and a new intron submodel. "
+"16","model","We predicted genes on the raw genome FASTA sequences using AUGUSTUS-3.3 (Stanke and Waack, 2003) and –genemodel = partial –gff3 = on –species = E_coli_K12 settings. "
+"17","model","Core-genome phylogenies of the strains were constructed using RAxML (Stamatakis et al., 2005) using the gamma model of rate heterogeneity and the generalized time reversible model of substitution. "

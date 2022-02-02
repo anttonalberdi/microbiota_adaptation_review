@@ -1,2 +1,5 @@
 "","Counts"
+"disease model",2
+"knockout",3
+"model",26
 "wild",8

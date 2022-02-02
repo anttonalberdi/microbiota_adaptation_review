@@ -32,3 +32,5 @@
 "31","adaptation","Exudativorous primates appear to have plastic digestive strategies that may be an adaptation to cope with relatively nutrient-poor staple food sources such as gum. "
 "32","adaptation","This anatomy most likely reflects an adaptation for efficient use of high-fiber diets and active microbial populations. "
 "33","adaptation","Slow lorises also appear to possess adaptations to highfiber diets, reflected in the large increase in MRT when we fed them wild-type diets. "
+"34","model","We used a generalized linear mixed model (GLMM) to test for main effects of species and diet composition on the TT and MRT. "
+"35","model","The TT was not affected by any variables we tested (overall model: χ2 = 77.549, df = 271, P = 0.0001; diet χ2 = 1.647, df = 1, P = 0.199; species χ2 = 54.528, df = 2, P = 0.608) but for MRT (overall model: (χ2 = 211.394, df = 271, P = 0.0001) both diet (χ2 = 710.276, df = 1, P = 0.0001) and species (χ2 = 17.531, df = 2, P = 0.0001) had a significant effect. "

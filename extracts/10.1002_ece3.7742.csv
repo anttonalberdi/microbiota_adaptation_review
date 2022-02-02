@@ -27,3 +27,7 @@
 "26","fitness","Host– pathogen interactions in a varying environment: Temperature, behavioural fever and fitness. "
 "27","adaptation","A variety of processes related to temperature regulation may be affected in radioactive areas leading to diverse mechanisms for adaptation to local contamination. "
 "28","adaptation","Chronic exposure to lowdose radiation at Chernobyl favours adaptation to oxidative stress in birds. "
+"29","model","Random effects of individual ID, year, and site of study were accounted for in the model. "
+"30","model","The model was simplified by stepwise backward elimination of weak twoway interactions and quadratic terms, while insignificant linear terms were retained in the final test. "
+"31","model","AD Model Builder: Using automatic differentiation for statistical inference of highly parameterized complex nonlinear models. "
+"32","model","(2016). glmmADMB: Generalized linear mixed models using AD Model Builder. "

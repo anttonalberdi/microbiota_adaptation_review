@@ -1,2 +1,4 @@
 "","Counts"
+"model",32
+"mutant",4
 "wild",9

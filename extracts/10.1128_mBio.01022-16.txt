@@ -1,3 +1,5 @@
 "","Counts"
 "adaptation",2
+"model",12
+"mutant",25
 "wild",4

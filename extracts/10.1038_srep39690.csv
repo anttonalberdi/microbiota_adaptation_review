@@ -13,3 +13,5 @@
 "12","adaptation","Herbivore-associated bacteria could have played a role in adaptation to new hosts and host range expansion20,33,54. "
 "13","adaptation","Host plant adaptations among geographic populations of the Colorado potato beetle. "
 "14","adaptation","Gut bacteria facilitate adaptation to crop rotation in the western corn rootworm. "
+"15","model","To investigate whether the abundance of defense-suppressing bacteria differs in response to diet, a generalized linear model with negative binomial errors was employed in R. "
+"16","model","Bacterial communities of diverse Drosophila species: ecological context of a host-microbe model system. "

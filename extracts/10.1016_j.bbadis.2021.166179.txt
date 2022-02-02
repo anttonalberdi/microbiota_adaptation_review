@@ -1,2 +1,6 @@
 "","Counts"
+"inbred",1
+"knockout",1
+"model",13
+"mutant",9
 "wild",2
