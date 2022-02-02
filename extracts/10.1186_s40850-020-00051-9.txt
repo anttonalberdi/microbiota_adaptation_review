@@ -1,3 +1,6 @@
 "","Counts"
+"disease",13
+"human",15
+"laboratory",2
 "model",1
 "wild",43

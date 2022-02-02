@@ -1,5 +1,8 @@
 "","Counts"
-"disease model",1
+"disease",67
+"environment",21
+"human",30
+"laboratory",4
 "model",39
 "mutant",6
 "wild",4

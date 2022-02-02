@@ -1,4 +1,6 @@
 "","Counts"
+"disease",4
+"environment",2
 "fitness",1
 "model",3
 "mutant",5

@@ -1,3 +1,6 @@
 "","Counts"
+"disease",13
+"environment",2
+"human",6
 "model",11
 "wild",3

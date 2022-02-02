@@ -1,5 +1,8 @@
 "","Counts"
-"adaptation",4
+"adaptat",4
+"disease",4
+"environment",1
+"human",3
 "knockout",1
 "model",2
 "mutant",1

@@ -1,5 +1,7 @@
 "","Counts"
+"environment",32
 "fitness",22
+"human",2
 "knockout",1
 "model",51
 "wild",16

@@ -1,6 +1,8 @@
 "","Counts"
-"adaptation",1
+"adaptat",1
+"disease",12
 "fitness",11
+"human",3
 "model",18
 "mutant",16
 "wild",20

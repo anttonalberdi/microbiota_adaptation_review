@@ -1,4 +1,6 @@
 "","Counts"
+"disease",2
+"human",4
 "model",2
 "mutant",34
 "wild",1

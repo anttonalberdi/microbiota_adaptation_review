@@ -1,5 +1,9 @@
 "","Counts"
+"disease",4
+"environment",5
 "fitness",2
+"human",5
 "knockout",4
+"laboratory",4
 "model",24
 "wild",2

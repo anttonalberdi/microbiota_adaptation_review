@@ -1,6 +1,10 @@
 "","Counts"
-"adaptation",10
+"adaptat",10
+"disease",2
+"environment",10
 "fitness",1
+"human",11
 "inbred",1
+"laboratory",5
 "model",23
 "wild",90

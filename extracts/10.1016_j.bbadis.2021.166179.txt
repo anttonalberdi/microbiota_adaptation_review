@@ -1,4 +1,7 @@
 "","Counts"
+"disease",6
+"environment",7
+"human",21
 "inbred",1
 "knockout",1
 "model",13

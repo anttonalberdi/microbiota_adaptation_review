@@ -1,4 +1,7 @@
 "","Counts"
-"adaptation",1
+"adaptat",1
+"disease",3
+"environment",3
 "fitness",1
+"human",5
 "wild",7

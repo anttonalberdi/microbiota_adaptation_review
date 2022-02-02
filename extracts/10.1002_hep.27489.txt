@@ -1,4 +1,6 @@
 "","Counts"
+"disease",54
+"human",12
 "knockout",2
 "model",22
 "mutant",18

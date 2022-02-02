@@ -1,4 +1,7 @@
 "","Counts"
-"adaptation",13
+"adaptat",13
+"environment",35
+"human",3
+"laboratory",7
 "model",4
 "wild",9

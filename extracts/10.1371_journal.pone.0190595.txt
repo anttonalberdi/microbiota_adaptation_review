@@ -1,6 +1,8 @@
 "","Counts"
-"adaptation",1
+"adaptat",1
+"disease",4
 "inbred",1
 "knockout",2
+"laboratory",1
 "model",13
 "wild",12

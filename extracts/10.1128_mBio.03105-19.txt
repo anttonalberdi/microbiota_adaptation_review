@@ -1,5 +1,7 @@
 "","Counts"
+"disease",37
 "fitness",1
+"human",18
 "model",49
 "mutant",36
 "wild",7

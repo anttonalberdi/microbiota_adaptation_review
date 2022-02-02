@@ -9,7 +9,7 @@ setwd("/Users/anttonalberdi/github/microbiota_adaptation_review/")
 ####
 # Define keywords
 ####
-keywords = c('wild', 'fitness', 'adaptation','mutant','inbred','model','c57bl','knockout','disease model')
+keywords = c('wild', 'fitness', 'adaptat','mutant','inbred','model','c57bl','knockout','disease','environment','human','laboratory')
 
 ####
 # Get list of dois

@@ -1,4 +1,6 @@
 "","Counts"
+"environment",1
+"human",2
 "model",6
 "mutant",17
 "wild",2
