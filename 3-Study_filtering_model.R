@@ -12,10 +12,12 @@ setwd("/Users/anttonalberdi/github/microbiota_adaptation_review/")
 keywords = c('wild', 'fitness', 'adaptat','mutant','inbred','model','c57bl','knockout','disease','environment','human','laboratory')
 
 ####
-# Get list of dois
+# Get list of DOIs for the modelling
 ####
-doilist <- list.files(path = "papers", pattern = ".pdf",full.names=FALSE)
-doilist <- gsub(".pdf","",doilist)
+
+model_data <- read.csv("data/all_20211025_random200.csv")
+DOIs <- model_data$DOI
+DOIs <- gsub("/","_",DOIs)
 
 ####
 # Iterate across dois
@@ -106,3 +108,29 @@ statstable <- rbind(statstable,countsvector)
 
 colnames(statstable) <- keywords
 rownames(statstable) <- doilist
+
+####
+# Create contingency table
+####
+
+all_stats <- lapply(list.files(path = "extracts", pattern = ".txt",  full.names = TRUE), function(x){read.csv(x,row.names=1)})
+
+#declare multimerge function
+multimerge <- function (mylist) {
+  ## mimics a recursive merge or full outer join
+  unames <- unique(unlist(lapply(mylist, rownames)))
+  n <- length(unames)
+  out <- lapply(mylist, function(df) {
+    tmp <- matrix(nr = n, nc = ncol(df), dimnames = list(unames,colnames(df)))
+    tmp[rownames(df), ] <- as.matrix(df)
+    rm(df); gc()
+    return(tmp)
+  })
+  stopifnot( all( sapply(out, function(x) identical(rownames(x), unames)) ) )
+  bigout <- do.call(cbind, out)
+  colnames(bigout) <- paste(rep(names(mylist), sapply(mylist, ncol)), unlist(sapply(mylist, colnames)), sep = "_")
+  return(bigout)
+}
+
+all_stats_matrix <- multimerge(all_stats)
+colnames(all_stats_matrix) <- gsub(".txt","",list.files(path = "extracts", pattern = ".txt",  full.names = FALSE))
